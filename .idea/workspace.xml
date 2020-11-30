@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="62f51d26-5437-4281-930d-7d1b409481b9" name="Default Changelist" comment="Backbone + front-end starter v 0.1">
       <change afterPath="$PROJECT_DIR$/html/linktostart.html" afterDir="false" />
@@ -70,5 +88,15 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Backbone + front-end starter v 0.1" />
     <option name="LAST_COMMIT_MESSAGE" value="Backbone + front-end starter v 0.1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1148" y="507" key="Vcs.Push.Dialog.v2" timestamp="1606730272707">
+      <screen x="0" y="0" width="3072" height="1728" />
+    </state>
+    <state x="1148" y="507" key="Vcs.Push.Dialog.v2/0.0.3072.1728@0.0.3072.1728" timestamp="1606730272707" />
+    <state x="1373" y="688" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606730207359">
+      <screen x="0" y="0" width="3072" height="1728" />
+    </state>
+    <state x="1373" y="688" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.3072.1728@0.0.3072.1728" timestamp="1606730207359" />
   </component>
 </project>
