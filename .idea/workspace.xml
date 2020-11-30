@@ -19,11 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="62f51d26-5437-4281-930d-7d1b409481b9" name="Default Changelist" comment="Backbone + front-end starter v 0.1">
-      <change afterPath="$PROJECT_DIR$/html/linktostart.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/reservering.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/contactformulier.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/html/intratuin-rhoon-1.html" beforeDir="false" />
+    <list default="true" id="62f51d26-5437-4281-930d-7d1b409481b9" name="Default Changelist" comment="Init">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/html/reservering.html" beforeDir="false" afterPath="$PROJECT_DIR$/html/reservering.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +56,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1606730077794</updated>
-      <workItem from="1606730078862" duration="334000" />
+      <workItem from="1606730078862" duration="3097000" />
     </task>
     <task id="LOCAL-00001" summary="Backbone + front-end starter v 0.1">
       <created>1606730180537</created>
@@ -67,7 +65,28 @@
       <option name="project" value="LOCAL" />
       <updated>1606730180537</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Backbone + front-end starter v 0.1">
+      <created>1606730443663</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1606730443663</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Init">
+      <created>1606730614849</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1606730614849</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Init">
+      <created>1606730689343</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1606730689343</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -87,16 +106,21 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Backbone + front-end starter v 0.1" />
-    <option name="LAST_COMMIT_MESSAGE" value="Backbone + front-end starter v 0.1" />
+    <MESSAGE value="Init" />
+    <option name="LAST_COMMIT_MESSAGE" value="Init" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1148" y="507" key="Vcs.Push.Dialog.v2" timestamp="1606730272707">
+    <state x="1148" y="507" key="Vcs.Push.Dialog.v2" timestamp="1606730702577">
       <screen x="0" y="0" width="3072" height="1728" />
     </state>
-    <state x="1148" y="507" key="Vcs.Push.Dialog.v2/0.0.3072.1728@0.0.3072.1728" timestamp="1606730272707" />
+    <state x="1148" y="507" key="Vcs.Push.Dialog.v2/0.0.3072.1728@0.0.3072.1728" timestamp="1606730702577" />
     <state x="1373" y="688" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606730207359">
       <screen x="0" y="0" width="3072" height="1728" />
     </state>
     <state x="1373" y="688" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.3072.1728@0.0.3072.1728" timestamp="1606730207359" />
+    <state x="1199" y="397" width="672" height="678" key="search.everywhere.popup" timestamp="1606731104822">
+      <screen x="0" y="0" width="3072" height="1728" />
+    </state>
+    <state x="1199" y="397" width="672" height="678" key="search.everywhere.popup/0.0.3072.1728@0.0.3072.1728" timestamp="1606731104822" />
   </component>
 </project>
