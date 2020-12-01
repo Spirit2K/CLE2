@@ -16,10 +16,19 @@
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </expand>
-    <select />
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:main" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="62f51d26-5437-4281-930d-7d1b409481b9" name="Default Changelist" comment="Init">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/dummy.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/html/reservering.html" beforeDir="false" afterPath="$PROJECT_DIR$/html/reservering.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -55,7 +64,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1606730077794</updated>
-      <workItem from="1606730078862" duration="3439000" />
+      <workItem from="1606730078862" duration="6932000" />
+      <workItem from="1606828914859" duration="2118000" />
     </task>
     <task id="LOCAL-00001" summary="Backbone + front-end starter v 0.1">
       <created>1606730180537</created>
@@ -92,7 +102,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606733215459</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Init">
+      <created>1606733698285</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1606733698285</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -103,11 +120,24 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -116,14 +146,14 @@
     <option name="LAST_COMMIT_MESSAGE" value="Init" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1148" y="507" key="Vcs.Push.Dialog.v2" timestamp="1606733225403">
+    <state x="1148" y="507" key="Vcs.Push.Dialog.v2" timestamp="1606737210139">
       <screen x="0" y="0" width="3072" height="1728" />
     </state>
-    <state x="1148" y="507" key="Vcs.Push.Dialog.v2/0.0.3072.1728@0.0.3072.1728" timestamp="1606733225403" />
-    <state x="1373" y="688" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606730207359">
+    <state x="1148" y="507" key="Vcs.Push.Dialog.v2/0.0.3072.1728@0.0.3072.1728" timestamp="1606737210139" />
+    <state x="1373" y="688" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606828936660">
       <screen x="0" y="0" width="3072" height="1728" />
     </state>
-    <state x="1373" y="688" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.3072.1728@0.0.3072.1728" timestamp="1606730207359" />
+    <state x="1373" y="688" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.3072.1728@0.0.3072.1728" timestamp="1606828936660" />
     <state x="1199" y="397" width="672" height="678" key="search.everywhere.popup" timestamp="1606731104822">
       <screen x="0" y="0" width="3072" height="1728" />
     </state>
