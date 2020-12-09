@@ -23,6 +23,8 @@ require_once 'config.inc.php';
     <th>Aantal Personen:</th>
     <th>Datum:</th>
     <th>Tijd:</th>
+    <th>Telefoonnummer:</th>
+    <th>Opmerking:</th>
 </tr>
 <?php
     $result = mysqli_query($mysqli, "SELECT * FROM reservering");
@@ -37,6 +39,8 @@ require_once 'config.inc.php';
         echo "<td>" . $row['aantalpersonen'] . "</td>";
         echo "<td>" . $row['datum'] . "</td>";
         echo "<td>" . $row['tijd'] . "</td>";
+        echo "<td>" . $row['telefoon'] . "</td>";
+        echo "<td>" . $row['opmerking'] . "</td>";
         //echo "<td><a href='reserveringbewerken.php?id=" . $row['id'] . "'>Bewerk</a></td>";
 
         // sluit de tabelrij
