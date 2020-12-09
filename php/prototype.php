@@ -16,6 +16,9 @@ if (isset($_POST['Submit']))
     }
     if($email == '') {
         $errors[] = 'Het veldnaam met e-mail mag niet leeg zijn.';
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $errors[] = "Niet geldige email.";
+        }
     }
     if($email == '') {
         $errors[] = 'Het veldnaam met aantal personen mag niet leeg zijn.';
@@ -30,8 +33,6 @@ if (isset($_POST['Submit']))
     if(empty($errors))
     {
         // Now this data can be stored in de database
-        if (strlen($datum) 	> 0 &&
-        strlen($naam) 	> 0) {
             $check1 = strtotime($datum);
             if (date('Y-m-d', $check1) == $datum) {
                 $query = "INSERT INTO reservering (naam, email, aantalpersonen, datum, tijd)
@@ -49,14 +50,6 @@ if (isset($_POST['Submit']))
                     echo "Er ging iets mis bij het toevoegen!";
                 }
             }
-            else
-            {
-                echo "De datum is ongeldig!";
-            }
-        }
-        else{
-            echo "Niet alle velden waren ingevuld!";
-        }
     }
 }
 ?>
@@ -89,11 +82,11 @@ if (isset($_POST['Submit']))
 
     <p> Voeg een reservering toe </p>
     <label for="naam">Naam:</label>
-    <input name="naam" id="naam" type="text" placeholder="Vul hier je naam in"> <br> <br>
+    <input name="naam" id="naam" type="text" placeholder="Vul hier je naam in" value="<?= isset($naam) ? $naam : '' ?>"> <br> <br>
     <label for="email">E-mail adres:</label>
-    <input name="email" id="email" type="email" placeholder="Vul hier je e-mail adres in"> <br> <br>
+    <input name="email" id="email" type="email" placeholder="Vul hier je e-mail adres in" value="<?= isset($email) ? $email : '' ?>"> <br> <br>
     <label for="aantalpersonen">Aantal Personen:</label>
-    <input name="aantalpersonen" id="aantalpersonen" type="number" min="0" placeholder="Vul hier de aantal personen in"> <br> <br>
+    <input name="aantalpersonen" id="aantalpersonen" type="number" min="0" placeholder="Vul hier de aantal personen in" value="<?= isset($aantal) ? $aantal : '' ?>"> <br> <br>
     <label for="datum">Datum:</label>
     <input name="datum" id="datum" type="date" placeholder="" min="<?php echo date('Y-m-d'); ?>"/> <br> <br>
     <label for="tijd">Tijd:</label>
