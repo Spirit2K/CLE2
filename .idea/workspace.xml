@@ -25,10 +25,11 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="62f51d26-5437-4281-930d-7d1b409481b9" name="Default Changelist" comment="Init">
+    <list default="true" id="62f51d26-5437-4281-930d-7d1b409481b9" name="Default Changelist" comment="v 0.1.1">
+      <change afterPath="$PROJECT_DIR$/css/SSadd_1.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/css/SSadd_final.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/css/mainSS.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/dummy.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/html/reservering.html" beforeDir="false" afterPath="$PROJECT_DIR$/html/reservering.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -65,7 +66,8 @@
       <option name="presentableId" value="Default" />
       <updated>1606730077794</updated>
       <workItem from="1606730078862" duration="6932000" />
-      <workItem from="1606828914859" duration="2118000" />
+      <workItem from="1606828914859" duration="2472000" />
+      <workItem from="1607505494288" duration="702000" />
     </task>
     <task id="LOCAL-00001" summary="Backbone + front-end starter v 0.1">
       <created>1606730180537</created>
@@ -109,7 +111,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606733698285</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Init">
+      <created>1606831141604</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1606831141604</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -146,10 +155,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="Init" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1148" y="507" key="Vcs.Push.Dialog.v2" timestamp="1606737210139">
+    <state x="1148" y="507" key="Vcs.Push.Dialog.v2" timestamp="1606831405878">
       <screen x="0" y="0" width="3072" height="1728" />
     </state>
-    <state x="1148" y="507" key="Vcs.Push.Dialog.v2/0.0.3072.1728@0.0.3072.1728" timestamp="1606737210139" />
+    <state x="1148" y="507" key="Vcs.Push.Dialog.v2/0.0.3072.1728@0.0.3072.1728" timestamp="1606831405878" />
     <state x="1373" y="688" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606828936660">
       <screen x="0" y="0" width="3072" height="1728" />
     </state>
