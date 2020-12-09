@@ -1,4 +1,6 @@
 <?php
+//test
+
 // lees het config-bestand
 require_once 'config.inc.php';
 
