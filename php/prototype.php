@@ -9,6 +9,8 @@ if (isset($_POST['Submit']))
     $aantal = $_POST['aantalpersonen'];
     $datum = $_POST['datum'];
     $tijd  = $_POST['tijd'];
+    $telefoon = $_POST['telefoon'];
+    $opmerking = $_POST['opmerking'];
 
     $errors = [];
     if($naam == '') {
@@ -35,8 +37,8 @@ if (isset($_POST['Submit']))
         // Now this data can be stored in de database
             $check1 = strtotime($datum);
             if (date('Y-m-d', $check1) == $datum) {
-                $query = "INSERT INTO reservering (naam, email, aantalpersonen, datum, tijd)
-                VALUES ('$naam', '$email', '$aantal', '$datum', '$tijd')";
+                $query = "INSERT INTO reservering (naam, email, aantalpersonen, datum, tijd, telefoon, opmerking)
+                VALUES ('$naam', '$email', '$aantal', '$datum', '$tijd', '$telefoon', '$opmerking')";
 
                 $result = mysqli_query($mysqli, $query);
 
@@ -96,7 +98,10 @@ if (isset($_POST['Submit']))
         <option value="14:00 - 15:00">14:00-15:00</option>
         <option value="15:00 - 16:00">15:00-16:00</option>
     </select> <br> <br>
-
+    <label for="telefoon">Telefoonnummer:</label>
+    <input name="telefoon" id="telefoon" type="text" placeholder="Vul hier telefoonnummer in" value="<?= isset($telefoon) ? $telefoon : '' ?>"> <br> <br>
+    <label for="opmerking">Opmerking:</label>
+    <input name="opmerking" id="opmerking" type="text" placeholder="Vul hier je opmerking in" value="<?= isset($opmerking) ? $opmerking : '' ?>"> <br> <br>
     <input name="Submit" id="Submit" type="submit" placeholder="Voeg toe">
 
 </form>
