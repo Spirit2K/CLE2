@@ -2,6 +2,13 @@
 // lees het config-bestand
 require_once 'config.inc.php';
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'PHPMailer/Exception.php';
+require 'PHPMailer/PHPMailer.php';
+require 'PHPMailer/SMTP.php';
+
 if (isset($_POST['Submit']))
 {
     $naam  = $_POST['naam'];
@@ -14,7 +21,7 @@ if (isset($_POST['Submit']))
 
     $errors = [];
     if($naam == '') {
-        $errors[] = 'Het veldnaam met naam  mag niet leeg zijn.';
+        $errors[] = 'Het veldnaam met naam mag niet leeg zijn.';
     }
     if($email == '') {
         $errors[] = 'Het veldnaam met e-mail mag niet leeg zijn.';
@@ -44,6 +51,44 @@ if (isset($_POST['Submit']))
 
                 if ($result)
                 {
+                    $body = file_get_contents('./templates/contact-mail.html');
+                    $body = str_replace('{naam}', $_POST['naam'], $body);
+                    $body = str_replace('{datum}', $_POST['datum'], $body);
+                    $body = str_replace('{tijd}', $_POST['tijd'], $body);
+                    $body = str_replace('{aantal}', $_POST['aantalpersonen'], $body);
+                    // Instantiation and passing `true` enables exceptions
+                    $mail = new PHPMailer(true);
+
+                    try {
+
+                        $mail->SMTPDebug = 2;
+
+                        $mail->isSMTP();
+                        $mail->Host = 'smtp.gmail.com';
+                        $mail->SMTPAuth = true;
+                        $mail->Username = 'hrstudent768@gmail.com';
+                        $mail->Password = 'E^14DD9gYqDa';
+                        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+                        $mail->Port = 465;
+
+                        //Recipients
+                        $mail->setFrom('hrstudent768@gmail.com', 'Mailer');
+                        $mail->addAddress($_POST['email'], $_POST['naam'] );     // Add a recipient
+                        //$mail->addAddress('ellen@example.com');               // Name is optional
+                        $mail->addReplyTo('hrstudent768@gmail.com');
+
+                        // Content
+                        $mail->isHTML(true);                                  // Set email format to HTML
+                        $mail->Subject = 'Bedankt voor uw reservering.';
+                        $mail->Body    = $body;
+                        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+                        $mail->send();
+                        echo 'Message has been sent';
+                    } catch (Exception $e) {
+                        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                    }
+
                     header("Location:prototype.php");
                     exit;
                 }
@@ -84,11 +129,11 @@ if (isset($_POST['Submit']))
 
     <p> Voeg een reservering toe </p>
     <label for="naam">Naam:</label>
-    <input name="naam" id="naam" type="text" placeholder="Vul hier je naam in" value="<?= isset($naam) ? $naam : '' ?>"> <br> <br>
+    <input name="naam" id="naam" type="text" placeholder="Vul hier je naam in" value="<?= isset($naam) ? htmlentities($naam) : '' ?>"> <br> <br>
     <label for="email">E-mail adres:</label>
-    <input name="email" id="email" type="email" placeholder="Vul hier je e-mail adres in" value="<?= isset($email) ? $email : '' ?>"> <br> <br>
+    <input name="email" id="email" type="email" placeholder="Vul hier je e-mail adres in" value="<?= isset($email) ? htmlentities($email) : '' ?>"> <br> <br>
     <label for="aantalpersonen">Aantal Personen:</label>
-    <input name="aantalpersonen" id="aantalpersonen" type="number" min="0" placeholder="Vul hier de aantal personen in" value="<?= isset($aantal) ? $aantal : '' ?>"> <br> <br>
+    <input name="aantalpersonen" id="aantalpersonen" type="number" min="0" placeholder="Vul hier de aantal personen in" value="<?= isset($aantal) ? htmlentities($aantal) : '' ?>"> <br> <br>
     <label for="datum">Datum:</label>
     <input name="datum" id="datum" type="date" placeholder="" min="<?php echo date('Y-m-d'); ?>"/> <br> <br>
     <label for="tijd">Tijd:</label>
@@ -99,9 +144,9 @@ if (isset($_POST['Submit']))
         <option value="15:00 - 16:00">15:00-16:00</option>
     </select> <br> <br>
     <label for="telefoon">Telefoonnummer:</label>
-    <input name="telefoon" id="telefoon" type="text" placeholder="Vul hier telefoonnummer in" value="<?= isset($telefoon) ? $telefoon : '' ?>"> <br> <br>
+    <input name="telefoon" id="telefoon" type="text" placeholder="Vul hier telefoonnummer in" value="<?= isset($telefoon) ? htmlentities($telefoon) : '' ?>"> <br> <br>
     <label for="opmerking">Opmerking:</label>
-    <input name="opmerking" id="opmerking" type="text" placeholder="Vul hier je opmerking in" value="<?= isset($opmerking) ? $opmerking : '' ?>"> <br> <br>
+    <input name="opmerking" id="opmerking" type="text" placeholder="Vul hier je opmerking in" value="<?= isset($opmerking) ? htmlentities($opmerking) : '' ?>"> <br> <br>
     <input name="Submit" id="Submit" type="submit" placeholder="Voeg toe">
 
 </form>
