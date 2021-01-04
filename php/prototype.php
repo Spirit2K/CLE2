@@ -61,7 +61,7 @@ if (isset($_POST['Submit']))
 
                     try {
 
-                        $mail->SMTPDebug = 2;
+                        //$mail->SMTPDebug = 2;
 
                         $mail->isSMTP();
                         $mail->Host = 'smtp.gmail.com';
@@ -89,7 +89,7 @@ if (isset($_POST['Submit']))
                         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                     }
 
-                    header("Location:prototype.php");
+                    header("Location:prototype.php"); // send to verification page
                     exit;
                 }
                 else
@@ -133,7 +133,12 @@ if (isset($_POST['Submit']))
     <label for="email">E-mail adres:</label>
     <input name="email" id="email" type="email" placeholder="Vul hier je e-mail adres in" value="<?= isset($email) ? htmlentities($email) : '' ?>"> <br> <br>
     <label for="aantalpersonen">Aantal Personen:</label>
-    <input name="aantalpersonen" id="aantalpersonen" type="number" min="0" placeholder="Vul hier de aantal personen in" value="<?= isset($aantal) ? htmlentities($aantal) : '' ?>"> <br> <br>
+    <!--<input name="aantalpersonen" id="aantalpersonen" type="number" min="0" max="" placeholder="Vul hier de aantal personen in" value="<?/*= isset($aantal) ? htmlentities($aantal) : '' */?>"> <br> <br>-->
+    <select name="aantalpersonen" size="1" id="tijdkeuze">
+        <option value="1">1 persoon</option>
+        <option value="2">2 personen</option>
+        <option value="3">3 personen</option>
+    </select> <br> <br>
     <label for="datum">Datum:</label>
     <input name="datum" id="datum" type="date" placeholder="" min="<?php echo date('Y-m-d'); ?>"/> <br> <br>
     <label for="tijd">Tijd:</label>
