@@ -1,7 +1,9 @@
 <?php
 // lees het config-bestand
+/** @var mysqli $mysqli */
 require_once 'config.inc.php';
 
+// Bestanden voor PHPMailer
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -11,14 +13,16 @@ require 'PHPMailer/SMTP.php';
 
 if (isset($_POST['Submit']))
 {
+    // zet de POST data in een variable
     $naam  = $_POST['naam'];
-    $email = $_POST['email'];
+    $email = $_POST['email']; // wachtwoord PASSWORD_DEFAULT
     $aantal = $_POST['aantalpersonen'];
     $datum = $_POST['datum'];
     $tijd  = $_POST['tijd'];
     $telefoon = $_POST['telefoon'];
     $opmerking = $_POST['opmerking'];
 
+    // Als er een error is dan voegt het aan de errors array toe
     $errors = [];
     if($naam == '') {
         $errors[] = 'Het veldnaam met naam mag niet leeg zijn.';
@@ -41,62 +45,77 @@ if (isset($_POST['Submit']))
 
     if(empty($errors))
     {
-        // Now this data can be stored in de database
+        // Nu kunnen we de data in een database opslaan
             $check1 = strtotime($datum);
             if (date('Y-m-d', $check1) == $datum) {
-                $query = "INSERT INTO reservering (naam, email, aantalpersonen, datum, tijd, telefoon, opmerking)
-                VALUES ('$naam', '$email', '$aantal', '$datum', '$tijd', '$telefoon', '$opmerking')";
+                // Maak een query en zet dat in $addq
+                // Prepare de statement
+                // Bind de parameters met de values
+                // Execute de statement
+                // Close de statement
+                $addq = "INSERT INTO reservering (naam, email, aantalpersonen, datum, tijd, telefoon, opmerking) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                $stmt = $mysqli->prepare($addq);
+                $stmt->bind_param("ssissis", $naam, $email, $aantal, $datum, $tijd, $telefoon, $opmerking);
+                $stmt->execute();
+                $stmt->close();
 
-                $result = mysqli_query($mysqli, $query);
+                // Oude code
 
-                if ($result)
-                {
-                    $body = file_get_contents('./templates/contact-mail.html');
-                    $body = str_replace('{naam}', $_POST['naam'], $body);
-                    $body = str_replace('{datum}', $_POST['datum'], $body);
-                    $body = str_replace('{tijd}', $_POST['tijd'], $body);
-                    $body = str_replace('{aantal}', $_POST['aantalpersonen'], $body);
-                    // Instantiation and passing `true` enables exceptions
-                    $mail = new PHPMailer(true);
+                    /*$query = "INSERT INTO reservering (naam, email, aantalpersonen, datum, tijd, telefoon, opmerking)
+                    VALUES ('$naam', '$email', '$aantal', '$datum', '$tijd', '$telefoon', '$opmerking')";*/
 
-                    try {
+                    //$result = mysqli_query($mysqli, $addq);
 
-                        //$mail->SMTPDebug = 2;
+                    //if ($result)
+                    //{
 
-                        $mail->isSMTP();
-                        $mail->Host = 'smtp.gmail.com';
-                        $mail->SMTPAuth = true;
-                        $mail->Username = 'hrstudent768@gmail.com';
-                        $mail->Password = 'E^14DD9gYqDa';
-                        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-                        $mail->Port = 465;
+                // Einde oude code
 
-                        //Recipients
-                        $mail->setFrom('hrstudent768@gmail.com', 'Mailer');
-                        $mail->addAddress($_POST['email'], $_POST['naam'] );     // Add a recipient
-                        //$mail->addAddress('ellen@example.com');               // Name is optional
-                        $mail->addReplyTo('hrstudent768@gmail.com');
+                $body = file_get_contents('./templates/contact-mail.html');
+                $body = str_replace('{naam}', $_POST['naam'], $body);
+                $body = str_replace('{datum}', $_POST['datum'], $body);
+                $body = str_replace('{tijd}', $_POST['tijd'], $body);
+                $body = str_replace('{aantal}', $_POST['aantalpersonen'], $body);
+                // Instantiation and passing `true` enables exceptions
+                $mail = new PHPMailer(true);
 
-                        // Content
-                        $mail->isHTML(true);                                  // Set email format to HTML
-                        $mail->Subject = 'Bedankt voor uw reservering.';
-                        $mail->Body    = $body;
-                        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+                try {
 
-                        $mail->send();
-                        echo 'Message has been sent';
-                    } catch (Exception $e) {
-                        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-                    }
+                    //$mail->SMTPDebug = 2;
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.gmail.com';
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'hrstudent768@gmail.com';
+                    $mail->Password = 'E^14DD9gYqDa';
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+                    $mail->Port = 465;
 
-                    header("Location:prototype.php"); // send to verification page
-                    exit;
+                    //Recipients
+                    $mail->setFrom('hrstudent768@gmail.com', 'Mailer');
+                    $mail->addAddress($_POST['email'], $_POST['naam'] );     // Add a recipient
+                    //$mail->addAddress('ellen@example.com');               // Name is optional
+                    $mail->addReplyTo('hrstudent768@gmail.com');
+
+                    // Content
+                    $mail->isHTML(true);                                  // Set email format to HTML
+                    $mail->Subject = 'Bedankt voor uw reservering.';
+                    $mail->Body    = $body;
+                    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+                    $mail->send();
+                    echo 'Message has been sent';
+                } catch (Exception $e) {
+                    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                 }
-                else
-                {
-                    echo "Er ging iets mis bij het toevoegen!";
+
+                header("Location:prototype.php"); // send to verification page
+                exit;
                 }
+            else
+            {
+                echo "Er ging iets mis bij het toevoegen!";
             }
+
     }
 }
 ?>
