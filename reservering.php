@@ -1,15 +1,15 @@
 <?php
 // lees het config-bestand
 /** @var mysqli $mysqli */
-require_once '../php/config.inc.php';
+require_once 'php/config.inc.php';
 
 // Bestanden voor PHPMailer
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require '../php/PHPMailer/Exception.php';
-require '../php/PHPMailer/PHPMailer.php';
-require '../php/PHPMailer/SMTP.php';
+require 'php/PHPMailer/Exception.php';
+require 'php/PHPMailer/PHPMailer.php';
+require 'php/PHPMailer/SMTP.php';
 
 if (isset($_POST['Submit']))
 {
@@ -59,7 +59,7 @@ if (isset($_POST['Submit']))
             $stmt->execute();
             $stmt->close();
 
-            $body = file_get_contents('./templates/contact-mail.html');
+            $body = file_get_contents('php/templates/contact-mail.html');
             $body = str_replace('{naam}', $_POST['naam'], $body);
             $body = str_replace('{datum}', $_POST['datum'], $body);
             $body = str_replace('{tijd}', $_POST['tijd'], $body);
@@ -96,7 +96,7 @@ if (isset($_POST['Submit']))
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             }
 
-            header("Location:bevestiging.html"); // send to verification page
+            header("Location:html/bevestiging.html"); // send to verification page
             exit;
         }
         else
@@ -112,13 +112,13 @@ if (isset($_POST['Submit']))
 <head>
 
     <title>Reserveren bij Intratuin Rhoon</title>
-    <link href= "../css/mainSS.css"
+    <link href= "css/mainSS.css"
           media="all" rel="stylesheet"
           type="text/css"/>
-    <link href="../css/SSadd_1.css"
+    <link href="css/SSadd_1.css"
           media= "screen and (min-width: 768px)" rel="stylesheet"
           type="text/css"/>
-    <link href="../css/SSadd_final.css"
+    <link href="css/SSadd_final.css"
           media="print" rel="stylesheet"
           type="text/css"/>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;0,900;1,300;1,400;1,600;1,700;1,900&amp;display=swap"
@@ -127,7 +127,7 @@ if (isset($_POST['Submit']))
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;0,900;1,300;1,400;1,600;1,700;1,900&display=swap"
           rel="stylesheet"
           type="text/css"/>
-    <link href= "../css/stylesheet.css"
+    <link href= "css/stylesheet.css"
           media="all" rel="stylesheet"
           type="text/css"/>
     <link href="https://www.intratuin.nl/media/favicon/default/favicon_1.ico" rel="icon" type="image/x-icon"/>
