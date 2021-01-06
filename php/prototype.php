@@ -48,7 +48,7 @@ if (isset($_POST['Submit']))
         // Nu kunnen we de data in een database opslaan
             $check1 = strtotime($datum);
             if (date('Y-m-d', $check1) == $datum) {
-                // Maak een query en zet dat in $addq
+                // Maak een query en zet dat in $addq variable
                 // Prepare de statement
                 // Bind de parameters met de values
                 // Execute de statement
