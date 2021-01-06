@@ -88,7 +88,7 @@ if (isset($_POST['Submit']))
                 $mail->isHTML(true);                                  // Set email format to HTML
                 $mail->Subject = 'Bedankt voor uw reservering.';
                 $mail->Body    = $body;
-                $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+                $mail->AltBody = 'Here is your message';
 
                 $mail->send();
                 echo 'Message has been sent';
