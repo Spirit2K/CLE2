@@ -108,7 +108,7 @@ if (isset($_POST['Submit']))
                     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                 }
 
-                header("Location:index.php"); // send to verification page
+                header("Location:prototype.php"); // send to verification page
                 exit;
                 }
             else
