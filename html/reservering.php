@@ -1,15 +1,124 @@
+<?php
+// lees het config-bestand
+/** @var mysqli $mysqli */
+require_once '../php/config.inc.php';
+
+// Bestanden voor PHPMailer
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require '../php/PHPMailer/Exception.php';
+require '../php/PHPMailer/PHPMailer.php';
+require '../php/PHPMailer/SMTP.php';
+
+if (isset($_POST['Submit']))
+{
+    // zet de POST data in een variable
+    $naam  = $_POST['naam'];
+    $email = $_POST['email']; // wachtwoord PASSWORD_DEFAULT
+    $aantal = $_POST['aantalpersonen'];
+    $datum = $_POST['datum'];
+    $tijd  = $_POST['tijd'];
+    $telefoon = $_POST['telefoon'];
+    $opmerking = $_POST['opmerking'];
+
+    // Als er een error is dan voegt het aan de errors array toe
+    $errors = [];
+    if($naam == '') {
+        $errors[] = 'Het veldnaam met naam mag niet leeg zijn.';
+    }
+    if($email == '') {
+        $errors[] = 'Het veldnaam met e-mail mag niet leeg zijn.';
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $errors[] = "Niet geldige email.";
+        }
+    }
+    if($email == '') {
+        $errors[] = 'Het veldnaam met aantal personen mag niet leeg zijn.';
+    }
+    if($datum == '') {
+        $errors[] = 'Het veldnaam met datum mag niet leeg zijn.';
+    }
+    if($tijd == '') {
+        $errors[] = 'Het veldnaam met tijd mag niet leeg zijn.';
+    }
+
+    if(empty($errors))
+    {
+        // Nu kunnen we de data in een database opslaan
+        $check1 = strtotime($datum);
+        if (date('Y-m-d', $check1) == $datum) {
+            // Maak een query en zet dat in $addq variable
+            // Prepare de statement
+            // Bind de parameters met de values
+            // Execute de statement
+            // Close de statement
+            $addq = "INSERT INTO reservering (naam, email, aantalpersonen, datum, tijd, telefoon, opmerking) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $mysqli->prepare($addq);
+            $stmt->bind_param("ssissis", $naam, $email, $aantal, $datum, $tijd, $telefoon, $opmerking);
+            $stmt->execute();
+            $stmt->close();
+
+            $body = file_get_contents('./templates/contact-mail.html');
+            $body = str_replace('{naam}', $_POST['naam'], $body);
+            $body = str_replace('{datum}', $_POST['datum'], $body);
+            $body = str_replace('{tijd}', $_POST['tijd'], $body);
+            $body = str_replace('{aantal}', $_POST['aantalpersonen'], $body);
+            // Instantiation and passing `true` enables exceptions
+            $mail = new PHPMailer(true);
+
+            try {
+
+                //$mail->SMTPDebug = 2;
+                $mail->isSMTP();
+                $mail->Host = 'smtp.gmail.com';
+                $mail->SMTPAuth = true;
+                $mail->Username = 'hrstudent768@gmail.com';
+                $mail->Password = 'E^14DD9gYqDa';
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+                $mail->Port = 465;
+
+                //Recipients
+                $mail->setFrom('hrstudent768@gmail.com', 'Mailer');
+                $mail->addAddress($_POST['email'], $_POST['naam'] );     // Add a recipient
+                //$mail->addAddress('ellen@example.com');               // Name is optional
+                $mail->addReplyTo('hrstudent768@gmail.com');
+
+                // Content
+                $mail->isHTML(true);                                  // Set email format to HTML
+                $mail->Subject = 'Bedankt voor uw reservering.';
+                $mail->Body    = $body;
+                $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+                $mail->send();
+                echo 'Message has been sent';
+            } catch (Exception $e) {
+                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            }
+
+            header("Location:bevestiging.html"); // send to verification page
+            exit;
+        }
+        else
+        {
+            echo "Er ging iets mis bij het toevoegen!";
+        }
+
+    }
+}
+?>
 <!doctype html>
 <html lang="nl">
 <head>
 
     <title>Reserveren bij Intratuin Rhoon</title>
-    <link href= "css/mainSS.css"
+    <link href= "../css/mainSS.css"
           media="all" rel="stylesheet"
           type="text/css"/>
-    <link href="css/SSadd_1.css"
+    <link href="../css/SSadd_1.css"
           media= "screen and (min-width: 768px)" rel="stylesheet"
           type="text/css"/>
-    <link href="css/SSadd_final.css"
+    <link href="../css/SSadd_final.css"
           media="print" rel="stylesheet"
           type="text/css"/>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;0,900;1,300;1,400;1,600;1,700;1,900&amp;display=swap"
@@ -18,13 +127,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;0,900;1,300;1,400;1,600;1,700;1,900&display=swap"
           rel="stylesheet"
           type="text/css"/>
+    <link href= "../css/stylesheet.css"
+          media="all" rel="stylesheet"
+          type="text/css"/>
     <link href="https://www.intratuin.nl/media/favicon/default/favicon_1.ico" rel="icon" type="image/x-icon"/>
     <link href="https://www.intratuin.nl/media/favicon/default/favicon_1.ico" rel="shortcut icon" type="image/x-icon"/>
 
 
     <style>
         .cms-home .headermessage {
-            margin-bottom -30px;
+            margin-bottom: -30px;
         }
     </style>
 </head>
@@ -119,7 +231,7 @@
 
                                                             <span class="price-container">
                             <span class="price-wrapper">
-                                ></span></span>
+                                </span></span>
 
                                                     <span class="special-price">
                             <span class="price-container">
@@ -207,7 +319,6 @@
                                             class="counter-number" data-bind="text: wishlist().counter"></span></span>
                                     <!-- /ko --><!-- ko ifnot: wishlist().counter --><span class="counter qty"><span
                                             class="counter-number">0</span></span> <!-- /ko --></a></li>
-                                <
                             </ul>
                             <div class="minicart-wrapper" data-block="minicart"><a class="action showcart"
                                                                                    data-bind="scope: 'minicart_content'"
@@ -224,7 +335,6 @@
                                     <div data-bind="scope: 'minicart_content'" id="minicart-content-wrapper">
                                         <!-- ko template: getTemplate() --><!-- /ko --></div>
                                 </div>
-                                \
                             </div>
                         </div>
                     </div>
@@ -12806,9 +12916,18 @@
 
         </div>
         <div class="columns">
+            <?php if(isset($errors)) { ?>
+
+                <ul class="errors">
+                    <?php foreach ($errors as $error) { ?>
+                        <li><?= $error ?></li>
+                    <?php } ?>
+                </ul>
+
+            <?php } ?>
             <div class="column main"><input name="form_key" type="hidden" value="eU5kTrwxCq7VU1QA"/>
                 <div class="contact-form">
-                    <form action=" "
+                    <form action=""
                           data-hasrequired="&#x2A;&#x20;Deze&#x20;velden&#x20;zijn&#x20;verplicht."
                           method="POST">
                         <fieldset class="fieldset">
@@ -12817,15 +12936,14 @@
                             <div class="field store required dropdown-select"><label class="label" for="store"><span>Kies een dag </span></label>
                                 <div class="control">
                                     <input type="date" id="time"
-                                           name="trip-start"
-                                           value = <?php echo date("Y/m/d"); ?>
-                                           min="2020-01-11" max="2021-03-01">
+                                           name="datum"
+                                           min="<?php echo date('Y-m-d'); ?>"/>
                                 </select></div>
                             </div>
 
 
-                            <div class="field store required dropdown-select"><label class="label" for="store"><span>Gewenst tijdslot </span></label>
-                                <div class="control"> <select data-validate="{required:true}" id="store" name="store">
+                            <div class="field store required dropdown-select"><label class="label" for="tijd"><span>Gewenst tijdslot </span></label>
+                                <div class="control"> <select data-validate="{required:true}" id="tijdkeuze" name="tijd">
                                     <option value="">Kies een tijdslot..</option>
                                     <option value="09:30 - 10:00">09:30 - 10:00</option>
                                     <option value="10:00 - 10:30">10:00 - 10:30</option>
@@ -12850,8 +12968,8 @@
                                 </select></div>
                             </div>
 
-                            <div class="field store required dropdown-select"><label class="label" for="store"><span>Aantal bezoekende personen </span></label>
-                                <div class="control"><select data-validate="{required:true}" id="store" name="store">
+                            <div class="field store required dropdown-select"><label class="label" for="aantalpersonen"><span>Aantal bezoekende personen </span></label>
+                                <div class="control"><select data-validate="{required:true}" id="aantalkeuze" name="aantalpersonen">
                                     <option value="0">Aantal personen..</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -12864,28 +12982,28 @@
 
                             <div class="field name required"><label class="label" for="name"><span>Naam</span></label>
                                 <div class="outer-control">
-                                    <div class="control dropdown-select"><select data-validate="{required:true}"
+                                    <!--<div class="control dropdown-select"><select data-validate="{required:true}"
                                                                                  id="gender"
                                                                                  name="gender">
                                         <option value="Aanhef">Aanhef</option>
                                         <option value="Mevr.">Mevr.</option>
                                         <option value="Dhr.">Dhr.</option>
                                         <option value="Geen">Geen</option>
-                                    </select></div>
+                                    </select></div>-->
                                     <div class="control"><input class="input-text" data-validate="{required:true}"
-                                                                id="name" name="name"
+                                                                id="naam" name="naam"
                                                                 placeholder="Naam" title="Naam" type="text"
-                                                                value=""/></div>
+                                                                value="<?= isset($naam) ? htmlentities($naam) : '' ?>"/></div>
                                 </div>
                             </div>
 
 
                             <div class="field telephone"><label class="label"
-                                                                for="telephone"><span>Telefoonnummer</span></label>
-                                <div class="control"><input class="input-text" id="telephone" name="telephone"
+                                                                for="telefoon"><span>Telefoonnummer</span></label>
+                                <div class="control"><input class="input-text" id="telefoon" name="telefoon"
                                                             placeholder="Telefoonnummer" title="Telefoonnummer"
                                                             type="text"
-                                                            value=""/></div>
+                                                            value="<?= isset($telefoon) ? htmlentities($telefoon) : '' ?>"/></div>
                             </div>
                             <div class="field email required"><label class="label"
                                                                      for="email"><span>E-mail</span></label>
@@ -12893,7 +13011,7 @@
                                                             data-validate="{required:true, 'validate-email':true}"
                                                             id="email" name="email"
                                                             placeholder="E-mail" title="E-mail" type="email"
-                                                            value=""/>
+                                                            value="<?= isset($email) ? htmlentities($email) : '' ?>"/>
                                 </div>
                             </div>
 
@@ -12905,15 +13023,16 @@
                             </label>
                                 <div class="control"><textarea class="input-text" cols="5"
                                                                data-validate="{required:true}"
-                                                               id="comment" name="comment"
+                                                               id="comment" name="opmerking"
                                                                placeholder="Opmerking.." rows="3"
-                                                               title="Opmerking"></textarea></div>
+                                                               title="Opmerking"><?= isset($opmerking) ? htmlentities($opmerking) : '' ?></textarea></div>
                             </div>
                         </fieldset>
                         <div class="actions-toolbar"><span class="button-note">Verplichte velden</span>
                             <div class="primary"><input id="hideit" name="hideit" type="hidden" value=""/>
-                                <button class="action submit primary" title="Versturen" type="button">
-                                    <span>Versturen</span></button>
+                                <!--<button class="action submit primary" title="Versturen" type="button" name="Submit" id="Submit">
+                                    <span>Versturen</span></button>-->
+                                <input class="action submit primary" name="Submit" id="Submit" type="submit" placeholder="Voeg toe">
                             </div>
                         </div>
                     </form>
