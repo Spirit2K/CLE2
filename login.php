@@ -9,6 +9,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 }
 
 // Include config file
+/** @var mysqli $mysqli */
 require_once 'php/config.inc.php';
 
 // Define variables and initialize with empty values
@@ -40,7 +41,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         // Prepare a select statement
         $sql = "SELECT id, username, password FROM users WHERE username = ?";
 
-        if($stmt = mysqli_prepare($link, $sql)){
+        if($stmt = mysqli_prepare($mysqli, $sql)){
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "s", $param_username);
 
@@ -87,7 +88,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 
     // Close connection
-    mysqli_close($link);
+    mysqli_close($mysqli);
 }
 ?>
     <!doctype html>
