@@ -14,7 +14,7 @@ require_once 'php/config.inc.php';
 
 // Define variables and initialize with empty values
 $username = $password = $confirm_password = "";
-$username_err = $password_err = $confirm_password_err = "";
+//$username_err = $password_err = $confirm_password_err = "";
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -311,7 +311,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <div class="header-content-second">
                         <div class="header-additional-links">
                             <ul class="header links">
-                                <li><a href="login.php">Inloggen</a></li><!-- -->
+                                <li><a href="overzicht.php">Overzicht</a></li>
+                                <li><a href="logout.php">Uitloggen</a></li><!-- -->
                                 <li class="link wishlist" data-bind="scope: 'wishlist'"><a
                                         href="https://www.intratuin.nl/wishlist/"><span class="text">Verlanglijst</span>
                                         <!-- ko if: wishlist().counter --><span class="counter qty"><span
@@ -12936,26 +12937,24 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <h2>Registeren</h2>
             <p>Please fill this form to create an account.</p>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                <div class="form-group">
+                <div class="field name required">
                     <label>Username</label>
                     <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
 
                 </div>
-                <div class="form-group">
+                <div class="field password required">
                     <label>Password</label>
                     <input type="password" name="password" class="form-control" value="<?php echo $password; ?>">
 
                 </div>
-                <div class="form-group">
+                <div class="field password required">
                     <label>Confirm Password</label>
                     <input type="password" name="confirm_password" class="form-control" value="<?php echo $confirm_password; ?>">
 
                 </div>
-                <div class="form-group">
-                    <input type="submit" class="btn btn-primary" value="Submit">
-                    <input type="reset" class="btn btn-default" value="Reset">
+                <div class="primary">
+                    <input type="submit" class="action submit primary" value="Submit">
                 </div>
-                <p>Already have an account? <a href="login.php">Login here</a>.</p>
             </form>
         </div>
     </main>
@@ -12973,24 +12972,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <div data-background-images="{}" data-element="inner" data-enable-parallax="0"
                                  data-parallax-speed="0.5"
                                  style="justify-content: flex-start; display: flex; flex-direction: column; background-position: left top; background-size: cover; background-repeat: no-repeat; background-attachment: scroll; border-style: none; border-width: 1px; border-radius: 0px; margin: 0px 0px 10px; padding: 10px;">
-                                <div data-appearance="default" data-content-type="html" data-decoded="true"
-                                     data-element="main"
-                                     style="border-style: none; border-width: 1px; border-radius: 0px; margin: 0px; padding: 0px;">
-                                    <ul class="items">
-                                        <li class="item"><a href="#"><img
-                                                    alt="/" src="https://www.intratuin.nl/media/ism/iluma/usp1.png"/><span>Natuurlijk groen</span></a>
-                                        </li>
-                                        <li class="item"><a href="#"><img
-                                                    alt="/" src="https://www.intratuin.nl/media/ism/iluma/usp2.png"/><span>Natuurlijk vakmanschap</span></a>
-                                        </li>
-                                        <li class="item"><a href="#"><img
-                                                    alt="/" src="https://www.intratuin.nl/media/ism/iluma/usp3.png"/><span>Natuurlijk inspiratief</span></a>
-                                        </li>
-                                        <li class="item"><a href="#"><img
-                                                    alt="/" src="https://www.intratuin.nl/media/ism/iluma/usp4.png"/><span>Natuurlijk gastvrij</span></a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
