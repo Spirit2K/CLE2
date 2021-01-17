@@ -12937,6 +12937,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <h2>Registeren</h2>
             <p>Please fill this form to create an account.</p>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                <fieldset class="fieldset">
                 <div class="field name required">
                     <label>Username</label>
                     <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
@@ -12952,6 +12953,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <input type="password" name="confirm_password" class="form-control" value="<?php echo $confirm_password; ?>">
 
                 </div>
+                </fieldset>
                 <div class="primary">
                     <input type="submit" class="action submit primary" value="Submit">
                 </div>

@@ -12913,23 +12913,28 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 </ul>
 
             <?php } ?>
+            <div class="column main"><input name="form_key" type="hidden" value="eU5kTrwxCq7VU1QA"/>
+                <div class="contact-form">
 
                 <h2>Login</h2>
                 <p>Please fill in your credentials to login.</p>
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                    <div class="form-group">
+                    <fieldset class="fieldset">
+                    <div class="username">
                         <label>Username</label>
                         <input type="text" name="username" class="form-control" value="<?= isset($username) ? htmlentities($username) : '' ?>">
                     </div>
-                    <div class="form-group">
+                    <div class="password">
                         <label>Password</label>
                         <input type="password" name="password" class="form-control">
                     </div>
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-primary" value="Login">
+                    </fieldset>
+                    <div class="primary">
+                        <input type="submit" class="action submit primary" value="Login">
                     </div>
                 </form>
-
+                </div>
+            </div>
         </div>
     </main>
     <noscript>
