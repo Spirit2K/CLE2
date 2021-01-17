@@ -14,7 +14,7 @@ require_once 'php/config.inc.php';
 
 // Define variables and initialize with empty values
 $username = $password = "";
-$username_err = $password_err = "";
+//$username_err = $password_err = "";
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -12919,7 +12919,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                     <div class="form-group">
                         <label>Username</label>
-                        <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
+                        <input type="text" name="username" class="form-control" value="<?= isset($username) ? htmlentities($username) : '' ?>">
                     </div>
                     <div class="form-group">
                         <label>Password</label>
@@ -12928,7 +12928,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <div class="form-group">
                         <input type="submit" class="btn btn-primary" value="Login">
                     </div>
-                    <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
                 </form>
 
         </div>
@@ -12947,24 +12946,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <div data-background-images="{}" data-element="inner" data-enable-parallax="0"
                                  data-parallax-speed="0.5"
                                  style="justify-content: flex-start; display: flex; flex-direction: column; background-position: left top; background-size: cover; background-repeat: no-repeat; background-attachment: scroll; border-style: none; border-width: 1px; border-radius: 0px; margin: 0px 0px 10px; padding: 10px;">
-                                <div data-appearance="default" data-content-type="html" data-decoded="true"
-                                     data-element="main"
-                                     style="border-style: none; border-width: 1px; border-radius: 0px; margin: 0px; padding: 0px;">
-                                    <ul class="items">
-                                        <li class="item"><a href="#"><img
-                                                    alt="/" src="https://www.intratuin.nl/media/ism/iluma/usp1.png"/><span>Natuurlijk groen</span></a>
-                                        </li>
-                                        <li class="item"><a href="#"><img
-                                                    alt="/" src="https://www.intratuin.nl/media/ism/iluma/usp2.png"/><span>Natuurlijk vakmanschap</span></a>
-                                        </li>
-                                        <li class="item"><a href="#"><img
-                                                    alt="/" src="https://www.intratuin.nl/media/ism/iluma/usp3.png"/><span>Natuurlijk inspiratief</span></a>
-                                        </li>
-                                        <li class="item"><a href="#"><img
-                                                    alt="/" src="https://www.intratuin.nl/media/ism/iluma/usp4.png"/><span>Natuurlijk gastvrij</span></a>
-                                        </li>
-                                    </ul>
-                                </div>
+
                             </div>
                         </div>
                     </div>
