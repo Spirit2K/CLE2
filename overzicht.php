@@ -322,7 +322,7 @@ if (isset($_POST['Submit']))
                     <div class="header-content-second">
                         <div class="header-additional-links">
                             <ul class="header links">
-                                <li><a href="login.php">Inloggen</a></li><!-- -->
+                                <li><a href="logout.php">Uitloggen</a></li><!-- -->
                                 <li class="link wishlist" data-bind="scope: 'wishlist'"><a
                                         href="https://www.intratuin.nl/wishlist/"><span class="text">Verlanglijst</span>
                                         <!-- ko if: wishlist().counter --><span class="counter qty"><span
