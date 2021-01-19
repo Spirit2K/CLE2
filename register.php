@@ -106,8 +106,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     mysqli_close($mysqli);
 }
 ?>
-    <!doctype html>
-    <html lang="nl">
+<!doctype html>
+<html lang="nl">
 <head>
 
     <title>Reserveren bij Intratuin Rhoon</title>
