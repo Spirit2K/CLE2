@@ -13,109 +13,9 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 /** @var mysqli $mysqli */
 require_once 'php/config.inc.php';
 
-// Bestanden voor PHPMailer
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+$result = mysqli_query($mysqli, "SELECT * FROM reservering");
 
-require 'php/PHPMailer/Exception.php';
-require 'php/PHPMailer/PHPMailer.php';
-require 'php/PHPMailer/SMTP.php';
 
-if (isset($_POST['Submit']))
-{
-    // zet de POST data in een variable
-    $naam  = $_POST['naam'];
-    $email = $_POST['email']; // wachtwoord PASSWORD_DEFAULT
-    $aantal = $_POST['aantalpersonen'];
-    $datum = $_POST['datum'];
-    $tijd  = $_POST['tijd'];
-    $telefoon = $_POST['telefoon'];
-    $opmerking = $_POST['opmerking'];
-
-    // Als er een error is dan voegt het aan de errors array toe
-    $errors = [];
-    if($naam == '') {
-        $errors[] = 'Het veldnaam met naam mag niet leeg zijn.';
-    }
-    if($email == '') {
-        $errors[] = 'Het veldnaam met e-mail mag niet leeg zijn.';
-        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $errors[] = "Niet geldige email.";
-        }
-    }
-    if($email == '') {
-        $errors[] = 'Het veldnaam met aantal personen mag niet leeg zijn.';
-    }
-    if($datum == '') {
-        $errors[] = 'Het veldnaam met datum mag niet leeg zijn.';
-    }
-    if($tijd == '') {
-        $errors[] = 'Het veldnaam met tijd mag niet leeg zijn.';
-    }
-
-    if(empty($errors))
-    {
-        // Nu kunnen we de data in een database opslaan
-        $check1 = strtotime($datum);
-        if (date('Y-m-d', $check1) == $datum) {
-            // Maak een query en zet dat in $addq variable
-            // Prepare de statement
-            // Bind de parameters met de values
-            // Execute de statement
-            // Close de statement
-            $addq = "INSERT INTO reservering (naam, email, aantalpersonen, datum, tijd, telefoon, opmerking) VALUES (?, ?, ?, ?, ?, ?, ?)";
-            $stmt = $mysqli->prepare($addq);
-            $stmt->bind_param("ssissis", $naam, $email, $aantal, $datum, $tijd, $telefoon, $opmerking);
-            $stmt->execute();
-            $stmt->close();
-
-            $body = file_get_contents('php/templates/contact-mail.html');
-            $body = str_replace('{naam}', $_POST['naam'], $body);
-            $body = str_replace('{datum}', $_POST['datum'], $body);
-            $body = str_replace('{tijd}', $_POST['tijd'], $body);
-            $body = str_replace('{aantal}', $_POST['aantalpersonen'], $body);
-            // Instantiation and passing `true` enables exceptions
-            $mail = new PHPMailer(true);
-
-            try {
-
-                //$mail->SMTPDebug = 2;
-                $mail->isSMTP();
-                $mail->Host = 'smtp.gmail.com';
-                $mail->SMTPAuth = true;
-                $mail->Username = 'hrstudent768@gmail.com';
-                $mail->Password = 'E^14DD9gYqDa';
-                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-                $mail->Port = 465;
-
-                //Recipients
-                $mail->setFrom('hrstudent768@gmail.com', 'Mailer');
-                $mail->addAddress($_POST['email'], $_POST['naam'] );     // Add a recipient
-                //$mail->addAddress('ellen@example.com');               // Name is optional
-                $mail->addReplyTo('hrstudent768@gmail.com');
-
-                // Content
-                $mail->isHTML(true);                                  // Set email format to HTML
-                $mail->Subject = 'Bedankt voor uw reservering.';
-                $mail->Body    = $body;
-                $mail->AltBody = 'Here is your message';
-
-                $mail->send();
-                echo 'Message has been sent';
-            } catch (Exception $e) {
-                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-            }
-
-            header("Location:html/bevestiging.html"); // send to verification page
-            exit;
-        }
-        else
-        {
-            echo "Er ging iets mis bij het toevoegen!";
-        }
-
-    }
-}
 ?>
     <!doctype html>
     <html lang="nl">
@@ -322,6 +222,7 @@ if (isset($_POST['Submit']))
                     <div class="header-content-second">
                         <div class="header-additional-links">
                             <ul class="header links">
+                                <li><a href="register.php">Registeren</a></li>
                                 <li><a href="logout.php">Uitloggen</a></li><!-- -->
                                 <li class="link wishlist" data-bind="scope: 'wishlist'"><a
                                         href="https://www.intratuin.nl/wishlist/"><span class="text">Verlanglijst</span>
@@ -12938,10 +12839,12 @@ if (isset($_POST['Submit']))
                     <th>Tijd:</th>
                     <th>Telefoonnummer:</th>
                     <th>Opmerking:</th>
+                    <th>Bewerken:</th>
+                    <th>Verwijderen:</th>
                 </tr>
                 <?php
 
-                $result = mysqli_query($mysqli, "SELECT * FROM reservering");
+
                 // loop door alle rijen data heen
                 while ($row = mysqli_fetch_array($result)) {
                     // start een tabelrij
@@ -12955,7 +12858,8 @@ if (isset($_POST['Submit']))
                     echo "<td>" . $row['tijd'] . "</td>";
                     echo "<td>" . $row['telefoon'] . "</td>";
                     echo "<td>" . $row['opmerking'] . "</td>";
-                    //echo "<td><a href='reserveringbewerken.php?id=" . $row['id'] . "'>Bewerk</a></td>";
+                    echo "<td><a href='edit.php?id=" . $row['id'] . "'>Bewerken</a></td>";
+                    echo "<td><a href='delete.php?id=" . $row['id'] . "'>Verwijderen</a></td>";
 
                     // sluit de tabelrij
                     echo "</tr>";
@@ -12980,24 +12884,7 @@ if (isset($_POST['Submit']))
                             <div data-background-images="{}" data-element="inner" data-enable-parallax="0"
                                  data-parallax-speed="0.5"
                                  style="justify-content: flex-start; display: flex; flex-direction: column; background-position: left top; background-size: cover; background-repeat: no-repeat; background-attachment: scroll; border-style: none; border-width: 1px; border-radius: 0px; margin: 0px 0px 10px; padding: 10px;">
-                                <div data-appearance="default" data-content-type="html" data-decoded="true"
-                                     data-element="main"
-                                     style="border-style: none; border-width: 1px; border-radius: 0px; margin: 0px; padding: 0px;">
-                                    <ul class="items">
-                                        <li class="item"><a href="#"><img
-                                                    alt="/" src="https://www.intratuin.nl/media/ism/iluma/usp1.png"/><span>Natuurlijk groen</span></a>
-                                        </li>
-                                        <li class="item"><a href="#"><img
-                                                    alt="/" src="https://www.intratuin.nl/media/ism/iluma/usp2.png"/><span>Natuurlijk vakmanschap</span></a>
-                                        </li>
-                                        <li class="item"><a href="#"><img
-                                                    alt="/" src="https://www.intratuin.nl/media/ism/iluma/usp3.png"/><span>Natuurlijk inspiratief</span></a>
-                                        </li>
-                                        <li class="item"><a href="#"><img
-                                                    alt="/" src="https://www.intratuin.nl/media/ism/iluma/usp4.png"/><span>Natuurlijk gastvrij</span></a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
