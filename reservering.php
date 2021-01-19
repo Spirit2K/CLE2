@@ -22,26 +22,8 @@ if (isset($_POST['Submit']))
     $telefoon = $_POST['telefoon'];
     $opmerking = $_POST['opmerking'];
 
-    // Als er een error is dan voegt het aan de errors array toe
-    $errors = [];
-    if($naam == '') {
-        $errors[] = 'Het veldnaam met naam mag niet leeg zijn.';
-    }
-    if($email == '') {
-        $errors[] = 'Het veldnaam met e-mail mag niet leeg zijn.';
-        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $errors[] = "Niet geldige email.";
-        }
-    }
-    if($email == '') {
-        $errors[] = 'Het veldnaam met aantal personen mag niet leeg zijn.';
-    }
-    if($datum == '') {
-        $errors[] = 'Het veldnaam met datum mag niet leeg zijn.';
-    }
-    if($tijd == '') {
-        $errors[] = 'Het veldnaam met tijd mag niet leeg zijn.';
-    }
+    //Require the form validation handling
+    require_once "php/form-validatie.php";
 
     if(empty($errors))
     {
@@ -312,7 +294,7 @@ if (isset($_POST['Submit']))
                     <div class="header-content-second">
                         <div class="header-additional-links">
                             <ul class="header links">
-                                <li><a href="https://www.intratuin.nl/customer/account/">Inloggen</a></li><!-- -->
+                                <li><a href="login.php">Inloggen</a></li><!-- -->
                                 <li class="link wishlist" data-bind="scope: 'wishlist'"><a
                                         href="https://www.intratuin.nl/wishlist/"><span class="text">Verlanglijst</span>
                                     <!-- ko if: wishlist().counter --><span class="counter qty"><span
@@ -12938,7 +12920,7 @@ if (isset($_POST['Submit']))
                                     <input type="date" id="time"
                                            name="datum"
                                            min="<?php echo date('Y-m-d'); ?>"/>
-                                </select></div>
+                                </div>
                             </div>
 
 
@@ -12952,17 +12934,17 @@ if (isset($_POST['Submit']))
                                     <option value="11:30 - 12:00">11:30 - 12:00</option>
                                     <option value="12:00 - 12:30">12:00 - 12:30</option>
                                     <option value="12:30 - 13:00">12:30 - 13:00</option>
-                                    <option value="13:00 -13:30">13:00 -13:30</option>
+                                    <option value="13:00 - 13:30">13:00 - 13:30</option>
                                     <option value="13:30 - 14:00">13:30 - 14:00</option>
                                     <option value="14:00 - 14:30">14:00 - 14:30</option>
-                                    <option value="14:30 -15:00">14:30 -15:00</option>
+                                    <option value="14:30 - 15:00">14:30 - 15:00</option>
                                     <option value="15:00 - 15:30">15:00 - 15:30</option>
                                     <option value="15:30 - 16:00">15:30 - 16:00</option>
                                     <option value="16:00 - 16:30">16:00 - 16:30</option>
                                     <option value="16:30 - 17:00">16:30 - 17:00</option>
                                     <option value="17:00 - 17:30">17:00 - 17:30</option>
                                     <option value="17:30 - 18:00">17:30 - 18:00</option>
-                                    <option value="18:00 -18:30">18:00 -18:30</option>
+                                    <option value="18:00 - 18:30">18:00 - 18:30</option>
                                     <option value="18:30 - 19:00">18:30 - 19:00</option>
                                     <option value="19:30 - 20:00">19:30 - 20:00</option>
                                 </select></div>
