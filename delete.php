@@ -8695,6 +8695,9 @@ if (isset($_POST['submit'])) {
                                     <li class="mega style-tabs" id="menu2869"><a class="mega style-tabs" href="/acties"
                                                                                  title="Acties"><span
                                                 class="menu-title">Acties</span></a></li>
+                                    <li class="mega" id="menu476"><a class="mega" href="reservering.php"
+                                                                     title="Reservering"><span class="menu-title">Reservering</span></a>
+                                    </li>
                                     <li class="mega last headphone-icon" id="menu7"><a class="mega last headphone-icon"
                                                                                        href="/klantenservice"
                                                                                        title="Klantenservice"><span
