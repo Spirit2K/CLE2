@@ -12998,66 +12998,6 @@ mysqli_close($mysqli);
                     </form>
                 </div>
             </div>
-
-
-            <!--<form action="" method="post" enctype="multipart/form-data">
-                <fieldset class="fieldset">
-                    <div class="data-field">
-                        <label for="naam">Naam</label>
-                        <input id="naam" type="text" name="naam" value="<?/*= htmlentities($reservering['naam']) */?>"/>
-                        <span class="errors"><?/*= isset($errors['naam']) ? $errors['naam'] : '' */?></span>
-                    </div>
-                    <div class="data-field">
-                        <label for="email">Email</label>
-                        <input id="email" type="text" name="email" value="<?/*= htmlentities($reservering['email']) */?>"/>
-                        <span class="errors"><?/*= isset($errors['email']) ? $errors['email'] : '' */?></span>
-                    </div>
-                    <div class="data-field">
-                        <label for="aantalpersonen">Aantal Personen</label>
-                        <div class="field store required dropdown-select"><label class="label" for="aantalpersonen"><span>Aantal bezoekende personen </span></label>
-                            <div class="control"><select data-validate="{required:true}" id="aantalkeuze" name="aantalpersonen">
-                                    <option value="0">Aantal personen..</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-    
-                                </select></div>
-                        </div>
-                        <span class="errors"><?/*= isset($errors['aantalpersonen']) ? $errors['aantalpersonen'] : '' */?></span>
-                    </div>
-                    <div class="data-field">
-                        <label for="datum">Datum</label>
-                        <input type="date" id="time"
-                               name="datum"
-                               min="<?php /*echo date('Y-m-d'); */?>"/>
-                        <span class="errors"><?/*= isset($errors['datum']) ? $errors['datum'] : '' */?></span>
-                    </div>
-                    <div class="data-field">
-                        <label for="tijd">Tijd</label>
-                        <input id="tijd" type="number" name="tijd" value="<?/*= htmlentities($reservering['tijd']) */?>"/>
-                        <span class="errors"><?/*= isset($errors['tijd']) ? $errors['tijd'] : '' */?></span>
-                    </div>
-                    <div class="data-field">
-                        <label for="tracks">Telefoon</label>
-                        <input id="telefoon" type="number" name="telefoon" value="<?/*= htmlentities($reservering['telefoon']) */?>"/>
-                        <span class="errors"><?/*= isset($errors['telefoon']) ? $errors['telefoon'] : '' */?></span>
-                    </div>
-                    <div class="data-field">
-                        <label for="opmerking">Opmerkingen</label>
-                        <input id="opmerking" type="number" name="opmerking" value="<?/*= htmlentities($reservering['opmerking']) */?>"/>
-                        <span class="errors"><?/*= isset($errors['opmerking']) ? $errors['opmerking'] : '' */?></span>
-                    </div>
-                </fieldset>
-                <div class="primary">
-                    <input type="hidden" name="id" value="<?/*= $reserveringId */?>"/>
-                    <input type="hidden" name="current-image" value="<?/*= $reservering['image'] */?>"/>
-                    <input type="submit" class="action submit primary" name="submit" value="Save"/>
-                </div>
-            </form>
-            <div>
-                <a href="overzicht.php">Go back to the list</a>
-            </div>-->
         </div>
     </main>
     <noscript>
